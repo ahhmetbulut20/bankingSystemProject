@@ -138,3 +138,8 @@ AccountNumber in URL is owner account id. First of all, anyone can transfer from
         timestamp last_update_date,  
         boolean is_deleted DEFAULT false  
     }
+
+## Kafka
+Kafka's version kafka_2.12-3.2.0 was used. To run Kafka; in the file you downloaded kafka,  
+first cmd directory => .\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties   
+in the second cmd directory => .\bin\windows\kafka-server-start.bat .\config\server.properties  
