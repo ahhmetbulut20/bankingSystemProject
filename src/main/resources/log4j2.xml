@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration >
+	<!-- Console pattern -->
+	<Appenders>
+		<File name="file" fileName="C:\Users\PC\Desktop\file.log">
+			<PatternLayout pattern="%msg%n" />
+		</File>
+	</Appenders>
+	
+	<Loggers>
+		<Root level="info" additivity="false">
+		<AppenderRef ref="file"></AppenderRef>
+		</Root>
+		
+		<Logger name="com.ahhmet.bankingSystemProjecet.Application" level="INFO" additivity="false">
+    		<AppenderRef ref="console"/>
+		</Logger>
+	</Loggers>
+		
+</Configuration>

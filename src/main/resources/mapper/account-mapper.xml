@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    <mapper namespace = "com.ahhmet.bankingSystemProject.repository.IAccountRepository">
+	    
+	    <resultMap id="accountResultMap" type="Account">
+  			<id property="userId" column="user_id" />
+  			<id property="bankId" column="bank_id" />
+  			<result property="accountNumber" column="account_number"/>
+  			<result property="creationDate" column="creation_date"/>
+  			<result property="lastUpdateDate" column="last_update_date"/>
+  			<result property="isDeleted" column="is_deleted"/>
+		</resultMap>
+		
+		<select id="findByAccountNumber" resultMap="accountResultMap" >
+    		SELECT * FROM account WHERE account_number= #{accountNumber}
+    	</select>	
+	    
+	    
+	    <insert id="createAccount" parameterType="Account">
+			INSERT INTO account(user_id,bank_id,account_number,type,balance,creation_date,last_update_date,is_deleted) 
+			VALUES(#{userId},#{bankId},#{accountNumber},#{type},#{balance},#{creationDate},#{lastUpdateDate},#{isDeleted})
+		</insert>
+    	    	    	
+    	<update id="removeAccount" parameterType="Account">
+	    	UPDATE account SET is_deleted = true WHERE account_number = #{accountNumber}
+    	</update>
+		
+		<update id="updateBalance" parameterType="Account">
+	    	UPDATE account SET balance = #{balance}, last_update_date = #{lastUpdateDate} WHERE account_number = #{accountNumber}
+    	</update>
+	</mapper>
