@@ -66,7 +66,7 @@ This is our web service where users can log into the system. Thanks to the JWT T
 You can `PATCH` request to URL = `.../api/account`
 ```json
 {
-    "bank_id" : [bank_id]
+    "bankId" : [bank_id]
     "type": [TL, Dolar, Altın]
 }
 ```
