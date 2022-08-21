@@ -40,7 +40,7 @@ You can `POST` request to URL = `.../api/user/register`
 You can `PATCH` request to URL = `.../api/user/{id}`
 ```json
 {
-    "enable" : "[true or false]"
+    "enabled" : "[true or false]"
 }
 ```
 
