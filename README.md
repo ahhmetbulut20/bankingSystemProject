@@ -80,12 +80,12 @@ The id of the bank and the type of the account will be taken. Other columns of t
 
 ### For Get Detail of Account;
 
-You can `GET` request to URL = `.../api/account/{accountNumber}`
+You can `GET` request to URL = `.../api/account/{accountNumber}`  
 This is our service that brings the details of the account. Everyone will only be able to see the details of one of their accounts. Here, if the authenticated user wants to see the details of an account belonging to someone else, it will not be allowed.
 
 ### For Remove Account;
 
-You can `DELETE` request to URL = `.../api/account/{accountNumber}`
+You can `DELETE` request to URL = `.../api/account/{accountNumber}`  
 An account can be deleted in this service. Only users with REMOVE_ACCOUNT rights will be able to do this. Here Account will not be hard-delete from database; instead the value of the is_deleted column of the account will be updated to true.
 
 ### For Increase Balance;
@@ -111,3 +111,30 @@ You can `PATCH` request to URL = `.../api/account/transfer/{accountNumber}`
 
 AccountNumber in URL is owner account id. First of all, anyone can transfer from their own account to another account. So the senderAccountId authenticated user must have an account. If the sending account does not have sufficient balance, it will receive the message "insufficient balance". If the account types of the sending account and the receiving account are different, the transfer will be made by making conversions between the types. Collect Api > Economy > Gold, Currency and Stock Exchange API will be used while performing these conversions. If the sending account and the receiving account belong to other banks; If the sending account is in TL, 3 TL will be charged, and if it is in Dolar, an additional 1 Dolar EFT fee will be charged. If the sending account is Altın, there will be no deductions.
  
+## Database Design
+### For Bank;
+    {  
+        int id PRIMARY KEY AUTO_INCREMENT,  
+        string name NOT NULL UNIQUE  
+    }  
+### For User;
+    {
+        int id PRIMARY KEY AUTO_INCREMENT,  
+        String username NOT NULL UNIQUE,  
+        String email NOT NULL UNIQUE,  
+        String password NOT NULL,  
+        boolean enabled DEFAULT true,  
+        String authorities  
+    }  
+### For Account;
+    {
+        int id PRIMARY KEY AUTO_INCREMENT,  
+        user_id FOREING KEY(user.id),  
+        bank_id FOREIGN_KEY(bank.id),  
+        number int(10),  
+        String type(TL,ALTIN,DOLAR)  
+        double balance DEFAULT 0,  
+        timestamp creation_date,  
+        timestamp last_update_date,  
+        boolean is_deleted DEFAULT false  
+    }
